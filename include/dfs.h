@@ -26,12 +26,15 @@ typedef struct stack
 } stack;
 
 
-stack *push (stack * topp, node * node);
+void push(node * node);
 
 bool isEmpty (stack * topp);
 
-node *top (stack * topp);
+void top(stack * topp);
 
-stack *pop (stack * topp);
+node* pop(); 
 
 void print_stack (stack * topp);
+
+extern stack* head; //global variable
+

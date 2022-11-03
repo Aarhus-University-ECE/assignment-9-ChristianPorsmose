@@ -7,12 +7,32 @@
 #include <stdbool.h>		/* bool, true, false */
 #include "dfs.h"
 
+//init stack
+stack* head = NULL;
 
 void DFT (node * root)
 {
-	// Implement DFS
+  if (head == NULL) { //make head point root, by creating pointer to root. 
+    stack* rootptr = malloc(sizeof(stack));
+    rootptr->node = root; //make stack point to root.
+    rootptr->next = head; //make rootptr point to 0.
+    head = rootptr; //make head point to rootptr
+  }
+  while (head != NULL) { //while stack is not empty
+    node* p = pop(); 
+    print_node(p);
+    //if both cases below fail, node is a leaf. 
+    if (p->rchild != NULL) {
+      push(p->rchild);
+    }
+    if (p->lchild != NULL) { 
+      push(p->lchild);
+    }
+
+  }
+  }
+  
 	// Hint: You can use print_node, print_tree and/or print_stack.
-}
 
 node *make_node (int num, node * left, node * right)
 {
@@ -56,27 +76,36 @@ void print_tree (node * p, int depth)
     print_tree (p->rchild, depth + 1);
 }
 
-stack *push (stack * topp, node * node)
+void push(node * node)
 {
-	return 0;
+  stack* temp = malloc(sizeof(stack)); //pointer to stack
+  temp->node = node; //temp point to node
+  //insert temp in front of head.
+  temp->next = head; 
+  head = temp;
 }
 
 bool isEmpty (stack * topp)
 {
+
   return false;
 }
 
-node *top (stack * topp)
+void top(stack * topp)
 {
-	return 0;
+ 
 }
 
 // Utility function to pop topp  
 // element from the stack 
 
-stack *pop (stack * topp)
+node *pop()
 {
-	return 0;
+    stack* temp = head; //make temp point to first node
+    head = temp->next; //make head point to next node.
+    node* tempnode = temp->node;  //save node thats being pointed to
+    free(temp); 
+    return tempnode;
 }
 
 void print_stack (stack * topp)
