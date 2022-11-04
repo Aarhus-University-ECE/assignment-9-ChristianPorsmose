@@ -36,7 +36,12 @@ void DFT (node * root)
 
 node *make_node (int num, node * left, node * right)
 {
-	return 0;
+  node *p = malloc(sizeof(node));
+  p->lchild = left;
+  p->rchild = right;
+  p->num = num;
+  p->visited = false;
+	return p;
 }
 
 void free_node (node * p)
@@ -51,7 +56,7 @@ void print_node (node * p)
   if (p == NULL)
     printf ("NULL\n");
   else
-    printf ("%d", p->num);
+    printf ("%d ", p->num);
 }
 
 
